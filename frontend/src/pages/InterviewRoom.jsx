@@ -134,7 +134,7 @@ export default function Quiz() {
             <p className="text-lg font-medium text-slate-900">No questions available</p>
             <p className="text-sm mt-2 mb-6">Please ask an administrator to add questions for this role.</p>
             <button 
-              onClick={() => navigate('/home')}
+              onClick={() => navigate('/dashboard')}
               className="bg-white border border-gray-300 text-gray-700 px-6 py-2.5 rounded-lg font-medium hover:bg-gray-50 transition-colors shadow-sm"
             >
               Back to Dashboard

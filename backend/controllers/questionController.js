@@ -17,8 +17,102 @@ const getQuestions = async (req, res) => {
 const getQuestionsByRole = async (req, res) => {
     try {
         const { jobRole } = req.params;
-        // Fetch up to 30 questions for this role randomly or sequentially
-        const questions = await Question.find({ jobRole }).limit(30);
+        let questions = await Question.find({ jobRole }).limit(30);
+        
+        // AUTO-SEEDING LOGIC: If no questions exist for this role, auto-generate them
+        if (questions.length === 0) {
+            const isNetwork = jobRole.toLowerCase().includes('network');
+            const defaultDepartment = isNetwork ? 'IT & Networking' : 'General';
+            
+            let seedData = [];
+            
+            if (isNetwork) {
+                seedData = [
+                    {
+                        department: defaultDepartment,
+                        jobRole,
+                        questionText: 'Explain the 7 layers of the OSI model.',
+                        options: [
+                            'Physical, Data Link, Network, Transport, Session, Presentation, Application',
+                            'Network, Internet, Transport, Application, Session, Presentation, Physical',
+                            'Physical, Logical, Transport, Application, Session, Presentation, Data Link',
+                            'Application, Presentation, Session, Transport, Logical, Data Link, Physical'
+                        ],
+                        correctAnswer: 'Physical, Data Link, Network, Transport, Session, Presentation, Application'
+                    },
+                    {
+                        department: defaultDepartment,
+                        jobRole,
+                        questionText: 'What is the primary difference between TCP and UDP?',
+                        options: [
+                            'TCP is connection-oriented, UDP is connectionless',
+                            'UDP is connection-oriented, TCP is connectionless',
+                            'TCP is faster but less reliable than UDP',
+                            'Both operate strictly at the Application Layer'
+                        ],
+                        correctAnswer: 'TCP is connection-oriented, UDP is connectionless'
+                    },
+                    {
+                        department: defaultDepartment,
+                        jobRole,
+                        questionText: 'How does a router differ from a switch?',
+                        options: [
+                            'A router connects different networks (Layer 3), a switch connects devices within a network (Layer 2)',
+                            'A switch connects different networks, a router connects devices within a network',
+                            'They are functionally identical in modern networks',
+                            'A router only handles wireless traffic, a switch only handles wired traffic'
+                        ],
+                        correctAnswer: 'A router connects different networks (Layer 3), a switch connects devices within a network (Layer 2)'
+                    }
+                ];
+            } else {
+                seedData = [
+                    {
+                        department: defaultDepartment,
+                        jobRole,
+                        questionText: `What is a critical competency required for a successful ${jobRole}?`,
+                        options: [
+                            'Effective communication and teamwork',
+                            'Domain-specific technical expertise',
+                            'Analytical problem solving',
+                            'All of the above'
+                        ],
+                        correctAnswer: 'All of the above'
+                    },
+                    {
+                        department: defaultDepartment,
+                        jobRole,
+                        questionText: `How should a professional ${jobRole} handle a suddenly approaching tight deadline?`,
+                        options: [
+                            'Immediately request a deadline extension without reviewing the work',
+                            'Prioritize critical tasks, communicate blockers, and manage time efficiently',
+                            'Ignore the deadline and proceed at a normal pace',
+                            'Work non-stop without sleep until the task is complete'
+                        ],
+                        correctAnswer: 'Prioritize critical tasks, communicate blockers, and manage time efficiently'
+                    },
+                    {
+                        department: defaultDepartment,
+                        jobRole,
+                        questionText: 'Which of the following best describes an effective approach to overcoming a major project challenge?',
+                        options: [
+                            'Blaming other departments or team members',
+                            'Ignoring the problem hoping it resolves itself',
+                            'Analyzing the root cause, consulting peers, and methodically implementing a solution',
+                            'Immediately escalating to upper management before attempting to solve it'
+                        ],
+                        correctAnswer: 'Analyzing the root cause, consulting peers, and methodically implementing a solution'
+                    }
+                ];
+            }
+
+            // Insert seed data into MongoDB
+            await Question.insertMany(seedData);
+            
+            // Re-fetch the newly inserted questions
+            questions = await Question.find({ jobRole }).limit(30);
+        }
+
         res.json(questions);
     } catch (error) {
         res.status(500).json({ message: 'Server Error', error: error.message });
