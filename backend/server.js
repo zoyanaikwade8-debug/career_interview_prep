@@ -25,6 +25,12 @@ app.use('/api/questions', require('./routes/questionRoutes'));
 app.use('/api/departments', require('./routes/departmentRoutes'));
 app.use('/api/results', require('./routes/resultRoutes'));
 
+// Fallback Routes (in case frontend VITE_API_URL omits the /api prefix)
+app.use('/auth', require('./routes/authRoutes'));
+app.use('/questions', require('./routes/questionRoutes'));
+app.use('/departments', require('./routes/departmentRoutes'));
+app.use('/results', require('./routes/resultRoutes'));
+
 app.get('/', (req, res) => {
     res.send('API is running...');
 });
