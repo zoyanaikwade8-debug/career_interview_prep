@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Quiz from './pages/Quiz';
 import Results from './pages/Results';
 import Performance from './pages/Performance';
+import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/quiz/:role" element={<Quiz />} />
           <Route path="/results" element={<Results />} />
           <Route path="/performance" element={<Performance />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </Router>

@@ -40,6 +40,7 @@ const registerUser = async (req, res) => {
                 username: user.username,
                 email: user.email,
                 mobile: user.mobile,
+                profilePicture: user.profilePicture,
                 token: generateToken(user._id)
             });
         } else {
@@ -69,6 +70,7 @@ const loginUser = async (req, res) => {
                 username: user.username,
                 email: user.email,
                 mobile: user.mobile,
+                profilePicture: user.profilePicture,
                 token: generateToken(user._id)
             });
         } else {
@@ -93,6 +95,7 @@ const googleAuth = async (req, res) => {
                 username: user.username,
                 email: user.email,
                 mobile: user.mobile,
+                profilePicture: user.profilePicture,
                 token: generateToken(user._id)
             });
         } else {
@@ -121,6 +124,7 @@ const googleAuth = async (req, res) => {
                 username: user.username,
                 email: user.email,
                 mobile: user.mobile,
+                profilePicture: user.profilePicture,
                 token: generateToken(user._id)
             });
         }
@@ -129,8 +133,39 @@ const googleAuth = async (req, res) => {
     }
 };
 
+const updateProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+
+        if (user) {
+            user.firstName = req.body.firstName || user.firstName;
+            user.surname = req.body.surname || user.surname;
+            user.mobile = req.body.mobile || user.mobile;
+            user.profilePicture = req.body.profilePicture || user.profilePicture;
+
+            const updatedUser = await user.save();
+
+            res.json({
+                _id: updatedUser._id,
+                firstName: updatedUser.firstName,
+                surname: updatedUser.surname,
+                username: updatedUser.username,
+                email: updatedUser.email,
+                mobile: updatedUser.mobile,
+                profilePicture: updatedUser.profilePicture,
+                token: generateToken(updatedUser._id) // keep user logged in with a fresh token
+            });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error updating profile', error: error.message });
+    }
+};
+
 module.exports = {
     registerUser,
     loginUser,
-    googleAuth
+    googleAuth,
+    updateProfile
 };

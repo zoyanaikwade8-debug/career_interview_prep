@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { registerUser, loginUser, googleAuth } = require('../controllers/authController');
+const { registerUser, loginUser, googleAuth, updateProfile } = require('../controllers/authController');
 const { check } = require('express-validator');
+const { protect } = require('../middleware/authMiddleware');
 
 router.post(
     '/register',
@@ -30,5 +31,8 @@ router.post(
 
 // Google Auth Route
 router.post('/google', googleAuth);
+
+// Profile Route
+router.put('/profile', protect, updateProfile);
 
 module.exports = router;

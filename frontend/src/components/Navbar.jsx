@@ -33,9 +33,18 @@ export default function Navbar() {
             </Link>
             
             <div className="flex items-center gap-4 pl-6 border-l border-gray-200">
-              <div className="text-sm font-medium text-slate-900">
-                {userInfo.firstName} {userInfo.surname}
-              </div>
+              <Link to="/profile" className="flex items-center gap-2 hover:bg-gray-50 px-2 py-1 rounded-lg transition-colors">
+                {userInfo.profilePicture ? (
+                  <img src={userInfo.profilePicture} alt="Avatar" className="w-8 h-8 rounded-full object-cover border border-gray-200" />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-sm">
+                    {userInfo.firstName?.charAt(0)}{userInfo.surname?.charAt(0)}
+                  </div>
+                )}
+                <span className="text-sm font-medium text-slate-900 hidden sm:block">
+                  {userInfo.firstName} {userInfo.surname}
+                </span>
+              </Link>
               <button
                 onClick={handleLogout}
                 className="text-sm font-medium text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-4 py-2 rounded-lg transition-colors"
