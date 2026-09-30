@@ -58,62 +58,62 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md border-t-4 border-blue-600">
-        <h1 className="text-2xl font-bold text-center mb-6 tracking-wider text-gray-800">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-900 via-indigo-950 to-purple-950">
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl rounded-2xl p-8 max-w-md w-full mx-4">
+        <h1 className="text-3xl font-extrabold text-white text-center tracking-tight mb-2">
           CAREER INTERVIEW PREP
         </h1>
-        <h2 className="text-lg text-center text-gray-600 mb-6">Create your account</h2>
+        <h2 className="text-md text-center text-gray-300 mb-8">Create your account</h2>
 
-        {error && <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-3 rounded mb-4 text-sm font-medium">{error}</div>}
-        {success && <div className="bg-green-50 border-l-4 border-green-500 text-green-700 p-3 rounded mb-4 text-sm font-medium">{success}</div>}
+        {error && <div className="bg-red-500/20 border-l-4 border-red-500 text-red-200 p-3 rounded mb-6 text-sm font-medium backdrop-blur-sm">{error}</div>}
+        {success && <div className="bg-green-500/20 border-l-4 border-green-500 text-green-200 p-3 rounded mb-6 text-sm font-medium backdrop-blur-sm">{success}</div>}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex flex-col md:flex-row gap-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="flex flex-col md:flex-row gap-5">
             <div className="w-full">
-              <label className="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
-              <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="John" />
+              <label className="text-sm font-medium text-gray-200 block mb-1">First Name *</label>
+              <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} className="w-full bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none px-4 py-3 rounded-lg transition" placeholder="John" />
             </div>
             <div className="w-full">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Surname *</label>
-              <input type="text" name="surname" value={formData.surname} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Doe" />
+              <label className="text-sm font-medium text-gray-200 block mb-1">Surname *</label>
+              <input type="text" name="surname" value={formData.surname} onChange={handleChange} className="w-full bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none px-4 py-3 rounded-lg transition" placeholder="Doe" />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
-            <input type="text" name="username" value={formData.username} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="johndoe123" required />
+            <label className="text-sm font-medium text-gray-200 block mb-1">Username</label>
+            <input type="text" name="username" value={formData.username} onChange={handleChange} className="w-full bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none px-4 py-3 rounded-lg transition" placeholder="johndoe123" required />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email (Gmail only) *</label>
-            <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="johndoe@gmail.com" required />
+            <label className="text-sm font-medium text-gray-200 block mb-1">Email (Gmail only) *</label>
+            <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none px-4 py-3 rounded-lg transition" placeholder="johndoe@gmail.com" required />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
-            <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+1 234 567 8900" required />
+            <label className="text-sm font-medium text-gray-200 block mb-1">Mobile Number</label>
+            <input type="tel" name="mobile" value={formData.mobile} onChange={handleChange} className="w-full bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none px-4 py-3 rounded-lg transition" placeholder="+1 234 567 8900" required />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password *</label>
-            <input type="password" name="password" value={formData.password} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Exactly 8 chars (letters + numbers)" required />
+            <label className="text-sm font-medium text-gray-200 block mb-1">Password *</label>
+            <input type="password" name="password" value={formData.password} onChange={handleChange} className="w-full bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none px-4 py-3 rounded-lg transition" placeholder="Exactly 8 chars (letters + numbers)" required />
           </div>
 
           <button 
             type="submit" 
             disabled={isLoading}
-            className={`w-full text-white py-2 rounded-md transition duration-300 font-semibold mt-2 flex justify-center items-center ${isLoading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
+            className={`w-full text-white font-semibold py-3 rounded-lg shadow-lg transition duration-200 transform active:scale-95 flex justify-center items-center mt-2 ${isLoading ? 'bg-indigo-500/50 cursor-not-allowed' : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500'}`}
           >
             {isLoading ? (
               <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></span>
             ) : null}
-            {isLoading ? 'Registering...' : 'Register'}
+            {isLoading ? 'Creating Account...' : 'Register'}
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-600 mt-6">
-          Already have an account? <Link to="/login" className="text-blue-600 font-medium hover:underline">Log in</Link>
+        <p className="text-center text-sm text-gray-300 mt-8">
+          Already have an account? <Link to="/login" className="text-indigo-400 font-medium hover:underline transition">Log in</Link>
         </p>
       </div>
     </div>
