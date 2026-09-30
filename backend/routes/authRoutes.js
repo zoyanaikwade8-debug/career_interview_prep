@@ -13,8 +13,8 @@ router.post(
         check('mobile', 'Mobile number is required').not().isEmpty(),
         check(
             'password',
-            'Please enter a password with 6 or more characters, containing at least one number and one special character'
-        ).isLength({ min: 6 }).matches(/^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)
+            'Password must be exactly 8 characters long and contain both letters and numbers'
+        ).matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8}$/)
     ],
     registerUser
 );

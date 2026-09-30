@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const isProd = import.meta.env.PROD;
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL || (isProd ? 'https://career-interview-prep.onrender.com/api' : 'http://localhost:5000/api'),
 });
 
 // Add a request interceptor to automatically attach the token
