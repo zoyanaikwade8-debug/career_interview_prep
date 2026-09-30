@@ -1,15 +1,18 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "dummy-api-key",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "dummy-domain",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "dummy-project-id",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "dummy-bucket",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "dummy-sender",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "dummy-app-id"
+  apiKey: "AIzaSyC7ez7hb08xY-mJVW-tMrFbsYRuq1MQ9tI",
+  authDomain: "careerinterviewprep.firebaseapp.com",
+  projectId: "careerinterviewprep",
+  storageBucket: "careerinterviewprep.firebasestorage.app",
+  messagingSenderId: "712936776813",
+  appId: "1:712936776813:web:5b42bbcd90cc00d5178b64",
+  measurementId: "G-06W9G9K8HW"
 };
 
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
