@@ -79,7 +79,58 @@ const loginUser = async (req, res) => {
     }
 };
 
+const googleAuth = async (req, res) => {
+    try {
+        const { email, displayName } = req.body;
+        let user = await User.findOne({ email });
+
+        if (user) {
+            // Log in existing user
+            return res.json({
+                _id: user._id,
+                firstName: user.firstName,
+                surname: user.surname,
+                username: user.username,
+                email: user.email,
+                mobile: user.mobile,
+                token: generateToken(user._id)
+            });
+        } else {
+            // Register new user via Google
+            const names = displayName ? displayName.split(' ') : ['Google', 'User'];
+            const firstName = names[0];
+            const surname = names.length > 1 ? names[names.slice(1).join(' ')] : 'User';
+            const username = email.split('@')[0] + Math.floor(Math.random() * 1000);
+            
+            // Generate a secure random password since they use Google
+            const password = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8) + "1!";
+
+            user = await User.create({
+                firstName,
+                surname: (surname && surname !== 'undefined') ? surname : 'User',
+                username,
+                email,
+                mobile: '0000000000', // Default mobile for OAuth users
+                password
+            });
+
+            return res.status(201).json({
+                _id: user._id,
+                firstName: user.firstName,
+                surname: user.surname,
+                username: user.username,
+                email: user.email,
+                mobile: user.mobile,
+                token: generateToken(user._id)
+            });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error during Google Auth', error: error.message });
+    }
+};
+
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    googleAuth
 };
