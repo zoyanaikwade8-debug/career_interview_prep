@@ -14,21 +14,23 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Navigate to="/register" replace />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        
-        {/* Protected Routes */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/interview/:role" element={<InterviewRoom />} />
-          <Route path="/results" element={<Results />} />
-          <Route path="/performance" element={<Performance />} />
-          <Route path="/profile" element={<Profile />} />
-        </Route>
-      </Routes>
+      <main className="pt-16 min-h-screen">
+        <Routes>
+          <Route path="/" element={<Navigate to="/register" replace />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          
+          {/* Protected Routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/interview/:role" element={<InterviewRoom />} />
+            <Route path="/results" element={<Results />} />
+            <Route path="/performance" element={<Performance />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </main>
     </Router>
   );
 }

@@ -72,9 +72,9 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50">
-      <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-8 max-w-md w-full mx-auto">
-        <h1 className="text-slate-900 text-2xl font-bold text-center">
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-8 bg-slate-50">
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-6 sm:p-8 max-w-md w-full mx-auto">
+        <h1 className="text-slate-900 text-xl md:text-2xl font-bold text-center">
           Welcome Back
         </h1>
         <p className="text-gray-500 text-sm mt-1 text-center mb-8">Log in to your account</p>
