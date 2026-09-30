@@ -118,128 +118,119 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen p-6 bg-gray-50">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
-          ADMIN DASHBOARD - QUESTIONS
-        </h1>
+    <div className="min-h-screen bg-slate-50 flex flex-col">
+      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+        <div className="text-center mb-10">
+          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
+            Question Bank Administration
+          </h1>
+          <p className="text-gray-500 text-sm">Manage, create, and update interview questions for all roles.</p>
+        </div>
 
         {message && (
-          <div className="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-3 rounded mb-6 font-medium shadow-sm">
+          <div className="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-4 rounded-lg mb-8 font-medium shadow-sm max-w-4xl mx-auto">
             {message}
           </div>
         )}
 
-        <div className="bg-white p-6 rounded-lg shadow-md mb-10">
-          <h2 className="text-xl font-semibold mb-4 text-gray-700 border-b pb-2">
-            {editId ? 'Edit Question' : 'Add New Question'}
-          </h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="flex flex-col md:flex-row gap-4">
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
-                <input type="text" name="department" value={formData.department} onChange={handleChange} required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., Engineering" />
-              </div>
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Job Role</label>
-                <input type="text" name="jobRole" value={formData.jobRole} onChange={handleChange} required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., Software Developer" />
-              </div>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Form Column */}
+          <div className="lg:col-span-1">
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 sticky top-24">
+              <h2 className="text-xl font-bold mb-6 text-slate-900 border-b border-gray-100 pb-3">
+                {editId ? 'Edit Question' : 'Add New Question'}
+              </h2>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-1 block">Department</label>
+                  <input type="text" name="department" value={formData.department} onChange={handleChange} required className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-sm transition-all" placeholder="e.g., Engineering" />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-1 block">Job Role</label>
+                  <input type="text" name="jobRole" value={formData.jobRole} onChange={handleChange} required className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-sm transition-all" placeholder="e.g., Software Developer" />
+                </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Question Text</label>
-              <textarea name="questionText" value={formData.questionText} onChange={handleChange} required rows="3" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter the interview question..." />
-            </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-1 block">Question Text</label>
+                  <textarea name="questionText" value={formData.questionText} onChange={handleChange} required rows="3" className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-sm transition-all resize-none" placeholder="Enter the interview question..." />
+                </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Option 1</label>
-                <input type="text" name="option1" value={formData.option1} onChange={handleChange} required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Option 2</label>
-                <input type="text" name="option2" value={formData.option2} onChange={handleChange} required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Option 3</label>
-                <input type="text" name="option3" value={formData.option3} onChange={handleChange} required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Option 4</label>
-                <input type="text" name="option4" value={formData.option4} onChange={handleChange} required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-              </div>
-            </div>
+                <div className="space-y-3">
+                  <label className="text-sm font-semibold text-gray-700 block">Options</label>
+                  <input type="text" name="option1" value={formData.option1} onChange={handleChange} required className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm" placeholder="Option 1" />
+                  <input type="text" name="option2" value={formData.option2} onChange={handleChange} required className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm" placeholder="Option 2" />
+                  <input type="text" name="option3" value={formData.option3} onChange={handleChange} required className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm" placeholder="Option 3" />
+                  <input type="text" name="option4" value={formData.option4} onChange={handleChange} required className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm" placeholder="Option 4" />
+                </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Correct Answer</label>
-              <input type="text" name="correctAnswer" value={formData.correctAnswer} onChange={handleChange} required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Must match one of the options exactly" />
-            </div>
+                <div className="pt-2">
+                  <label className="text-sm font-semibold text-gray-700 mb-1 block">Correct Answer</label>
+                  <input type="text" name="correctAnswer" value={formData.correctAnswer} onChange={handleChange} required className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm" placeholder="Must match one option exactly" />
+                </div>
 
-            <div className="flex gap-4 pt-2">
-              <button 
-                type="submit" 
-                disabled={isSubmitting}
-                className={`text-white px-6 py-2 rounded-md transition font-semibold flex items-center ${isSubmitting ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
-              >
-                {isSubmitting ? (
-                  <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></span>
-                ) : null}
-                {editId ? (isSubmitting ? 'Updating...' : 'Update Question') : (isSubmitting ? 'Adding...' : 'Add Question')}
-              </button>
-              {editId && (
-                <button type="button" onClick={cancelEdit} className="bg-gray-400 text-white px-6 py-2 rounded-md hover:bg-gray-500 transition font-semibold">
-                  Cancel Edit
-                </button>
-              )}
+                <div className="flex flex-col gap-3 pt-4">
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className={`w-full text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-all shadow-sm flex justify-center items-center ${isSubmitting ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300'}`}
+                  >
+                    {isSubmitting ? (
+                      <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>
+                    ) : null}
+                    {editId ? (isSubmitting ? 'Updating...' : 'Update Question') : (isSubmitting ? 'Adding...' : 'Save Question')}
+                  </button>
+                  {editId && (
+                    <button type="button" onClick={cancelEdit} className="w-full bg-white border border-gray-300 text-gray-700 px-5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
+                      Cancel Edit
+                    </button>
+                  )}
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
+          </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold mb-4 text-gray-700 border-b pb-2">Existing Questions</h2>
-          
-          {questions.length === 0 ? (
-            <p className="text-gray-500 text-center py-4">No questions found. Add some above.</p>
-          ) : (
-            <div className="space-y-6">
-              {questions.map((q) => (
-                <div key={q._id} className="border p-4 rounded-md hover:shadow-sm transition bg-gray-50">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mr-2 font-medium">
+          {/* List Column */}
+          <div className="lg:col-span-2 space-y-4">
+            <h2 className="text-xl font-bold text-slate-900 mb-4 px-2">Existing Questions ({questions.length})</h2>
+            {questions.length === 0 ? (
+              <div className="bg-white p-12 rounded-2xl border border-gray-200 text-center text-gray-500">
+                No questions found. Add your first question using the form.
+              </div>
+            ) : (
+              questions.map((q) => (
+                <div key={q._id} className="bg-white border border-gray-200 p-6 rounded-2xl hover:shadow-md transition-shadow">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex flex-wrap gap-2">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                         {q.department}
                       </span>
-                      <span className="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded font-medium">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
                         {q.jobRole}
                       </span>
                     </div>
                     <div className="flex gap-2">
-                      <button onClick={() => handleEdit(q)} className="text-sm bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded transition">
+                      <button onClick={() => handleEdit(q)} className="text-sm font-medium text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-md transition-colors">
                         Edit
                       </button>
-                      <button onClick={() => handleDelete(q._id)} className="text-sm bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition">
+                      <button onClick={() => handleDelete(q._id)} className="text-sm font-medium text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-md transition-colors">
                         Delete
                       </button>
                     </div>
                   </div>
-                  <h3 className="font-semibold text-lg text-gray-800 mb-2">{q.questionText}</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-600 mb-3">
+                  <h3 className="font-semibold text-lg text-slate-900 mb-4">{q.questionText}</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-600 mb-4">
                     {q.options.map((opt, i) => (
-                      <div key={i} className={`p-2 border rounded ${opt === q.correctAnswer ? 'bg-green-100 border-green-300 font-medium text-green-800' : 'bg-white'}`}>
+                      <div key={i} className={`p-3 border rounded-lg ${opt === q.correctAnswer ? 'bg-green-50 border-green-200 text-green-900 font-medium' : 'bg-gray-50 border-gray-200'}`}>
                         {i + 1}. {opt}
                       </div>
                     ))}
                   </div>
-                  <p className="text-sm">
-                    <span className="font-semibold text-gray-700">Correct Answer: </span> 
-                    <span className="text-green-600 font-medium">{q.correctAnswer}</span>
-                  </p>
                 </div>
-              ))}
-            </div>
-          )}
+              ))
+            )}
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

@@ -5,18 +5,27 @@ import AdminDashboard from './pages/AdminDashboard';
 import Home from './pages/Home';
 import Quiz from './pages/Quiz';
 import Results from './pages/Results';
+import Performance from './pages/Performance';
+import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Navigate to="/register" replace />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/quiz/:role" element={<Quiz />} />
-        <Route path="/results" element={<Results />} />
+        
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/quiz/:role" element={<Quiz />} />
+          <Route path="/results" element={<Results />} />
+          <Route path="/performance" element={<Performance />} />
+        </Route>
       </Routes>
     </Router>
   );

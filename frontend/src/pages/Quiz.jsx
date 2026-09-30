@@ -92,54 +92,54 @@ export default function Quiz() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex justify-center items-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-slate-50 flex justify-center items-center">
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8 font-sans text-gray-800">
-      <div className="max-w-3xl mx-auto space-y-6">
+    <div className="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8 font-sans">
+      <div className="max-w-4xl mx-auto space-y-6">
         
         {/* Timer Bar (Sticky) */}
-        <div className="sticky top-0 z-10 bg-white shadow-sm border-t-8 border-blue-600 rounded-lg p-4 flex justify-between items-center mb-6">
+        <div className="sticky top-20 z-10 bg-white shadow-sm border border-gray-200 rounded-2xl p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">{decodedRole} Interview Quiz</h1>
-            <p className="text-sm text-gray-500 mt-1">Answer all questions to the best of your ability.</p>
+            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">{decodedRole} Assessment</h1>
+            <p className="text-sm text-gray-500 mt-1">Select the best answer for each question.</p>
           </div>
-          <div className="text-center bg-gray-100 px-4 py-2 rounded-md border border-gray-200">
-            <span className="block text-xs uppercase font-bold text-gray-500 tracking-wider mb-1">Time Remaining</span>
-            <span className={`text-2xl font-mono font-bold ${timeLeft < 300 ? 'text-red-600' : 'text-gray-800'}`}>
+          <div className="text-center bg-slate-50 px-5 py-3 rounded-xl border border-gray-200 min-w-[140px]">
+            <span className="block text-[10px] uppercase font-bold text-gray-500 tracking-wider mb-1">Time Remaining</span>
+            <span className={`text-2xl font-mono font-bold tracking-tight ${timeLeft < 300 ? 'text-red-600' : 'text-slate-900'}`}>
               {formatTime(timeLeft)}
             </span>
           </div>
         </div>
 
         {!submitted && questions.length === 0 && (
-          <div className="bg-white rounded-lg shadow-sm p-8 text-center text-gray-500">
-            <p className="text-lg">No questions available for this role yet.</p>
-            <p className="text-sm mt-2">Please ask an administrator to add some questions.</p>
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center text-gray-500">
+            <p className="text-lg font-medium text-slate-900">No questions available</p>
+            <p className="text-sm mt-2 mb-6">Please ask an administrator to add questions for this role.</p>
             <button 
               onClick={() => navigate('/home')}
-              className="mt-6 bg-blue-600 text-white px-6 py-2 rounded font-medium hover:bg-blue-700 transition"
+              className="bg-white border border-gray-300 text-gray-700 px-6 py-2.5 rounded-lg font-medium hover:bg-gray-50 transition-colors shadow-sm"
             >
-              Go Back
+              Back to Dashboard
             </button>
           </div>
         )}
 
         {!submitted && questions.length > 0 && questions.map((q, index) => (
-          <div key={q._id} className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">
-              <span className="mr-2">{index + 1}.</span> {q.questionText}
+          <div key={q._id} className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 transition-shadow hover:shadow-md">
+            <h3 className="text-lg font-semibold text-slate-900 mb-5 leading-relaxed">
+              <span className="text-blue-600 mr-2">{index + 1}.</span> {q.questionText}
             </h3>
             <div className="space-y-3">
               {q.options.map((opt, i) => (
                 <label 
                   key={i} 
-                  className={`flex items-center p-3 border rounded-md cursor-pointer transition-colors ${
-                    answers[q._id] === opt ? 'bg-blue-50 border-blue-300' : 'hover:bg-gray-50 border-transparent'
+                  className={`flex items-center p-4 border rounded-xl cursor-pointer transition-all ${
+                    answers[q._id] === opt ? 'bg-blue-50 border-blue-600 ring-1 ring-blue-600' : 'hover:bg-slate-50 border-gray-200'
                   }`}
                 >
                   <input
@@ -148,9 +148,9 @@ export default function Quiz() {
                     value={opt}
                     checked={answers[q._id] === opt}
                     onChange={() => handleOptionChange(q._id, opt)}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-600 border-gray-300"
                   />
-                  <span className="ml-3 text-gray-700">{opt}</span>
+                  <span className={`ml-3 text-sm font-medium ${answers[q._id] === opt ? 'text-blue-900' : 'text-gray-700'}`}>{opt}</span>
                 </label>
               ))}
             </div>
@@ -159,22 +159,22 @@ export default function Quiz() {
 
         {/* Form Controls */}
         {!submitted && questions.length > 0 && (
-          <div className="flex justify-between items-center bg-transparent pt-4 pb-12">
+          <div className="flex justify-between items-center bg-transparent pt-6 pb-16">
             <button
               onClick={handleSave}
-              className="text-blue-700 font-medium px-4 py-2 hover:bg-blue-100 rounded transition"
+              className="text-gray-500 font-medium px-5 py-2.5 rounded-lg hover:bg-white hover:text-gray-900 hover:shadow-sm border border-transparent hover:border-gray-200 transition-all text-sm"
             >
               Save Progress
             </button>
             <button
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className={`text-white font-medium px-8 py-2 rounded shadow transition flex items-center ${isSubmitting ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
+              className={`text-white font-medium px-8 py-3 rounded-lg shadow-sm transition-all flex items-center text-sm ${isSubmitting ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300'}`}
             >
               {isSubmitting ? (
-                <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></span>
+                <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>
               ) : null}
-              {isSubmitting ? 'Submitting...' : 'Submit'}
+              {isSubmitting ? 'Submitting...' : 'Submit Assessment'}
             </button>
           </div>
         )}

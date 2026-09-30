@@ -43,6 +43,19 @@ const submitQuiz = async (req, res) => {
     }
 };
 
+// @desc    Get logged in user results
+// @route   GET /api/results
+// @access  Private
+const getUserResults = async (req, res) => {
+    try {
+        const results = await Result.find({ userId: req.user._id }).sort({ createdAt: -1 });
+        res.json(results);
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error fetching results', error: error.message });
+    }
+};
+
 module.exports = {
-    submitQuiz
+    submitQuiz,
+    getUserResults
 };
