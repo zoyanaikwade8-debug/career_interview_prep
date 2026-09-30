@@ -28,6 +28,7 @@ router.post(
     loginUser
 );
 
+// Google Auth Route
 router.post('/google', googleAuth);
 
 module.exports = router;
