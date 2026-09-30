@@ -39,7 +39,7 @@ export default function Register() {
       
       localStorage.setItem('userInfo', JSON.stringify(res.data));
       setSuccess('Google sign-in successful! Redirecting...');
-      setTimeout(() => navigate('/home'), 1000);
+      setTimeout(() => navigate('/dashboard'), 1000);
     } catch (err) {
       setError(err.message || 'Google Sign-In failed');
     } finally {
@@ -74,7 +74,7 @@ export default function Register() {
       const res = await api.post('/auth/register', formData);
       localStorage.setItem('userInfo', JSON.stringify(res.data));
       setSuccess('Registration successful! Redirecting...');
-      setTimeout(() => navigate('/home'), 1000);
+      setTimeout(() => navigate('/dashboard'), 1000);
     } catch (err) {
       setError(err.response?.data?.message || err.response?.data?.errors?.[0]?.msg || 'Registration failed');
     } finally {

@@ -9,13 +9,15 @@ import Performance from './pages/Performance';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
   return (
     <Router>
       <Navbar />
       <main className="pt-16 min-h-screen">
-        <Routes>
+        <ErrorBoundary>
+          <Routes>
           <Route path="/" element={<Navigate to="/register" replace />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
@@ -30,6 +32,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
           </Route>
         </Routes>
+        </ErrorBoundary>
       </main>
     </Router>
   );

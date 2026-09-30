@@ -35,7 +35,7 @@ export default function Login() {
       
       localStorage.setItem('userInfo', JSON.stringify(res.data));
       setSuccess('Google login successful! Redirecting...');
-      setTimeout(() => navigate('/home'), 1000);
+      setTimeout(() => navigate('/dashboard'), 1000);
     } catch (err) {
       setError(err.message || 'Google Sign-In failed');
     } finally {
@@ -63,7 +63,7 @@ export default function Login() {
       localStorage.setItem('userInfo', JSON.stringify(res.data));
       
       setSuccess('Login successful! Redirecting...');
-      setTimeout(() => navigate('/home'), 1000);
+      setTimeout(() => navigate('/dashboard'), 1000);
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {

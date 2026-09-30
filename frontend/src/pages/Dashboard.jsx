@@ -46,16 +46,16 @@ export default function Dashboard() {
         {/* Profile Summary Hero */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 flex flex-col md:flex-row items-center md:items-start gap-6">
           <div className="h-24 w-24 rounded-full bg-blue-100 flex items-center justify-center overflow-hidden border-4 border-white shadow-md flex-shrink-0">
-            {userInfo.profilePicture ? (
+            {userInfo?.profilePicture ? (
               <img src={userInfo.profilePicture} alt="Profile" className="h-full w-full object-cover" />
             ) : (
               <span className="text-3xl font-bold text-blue-600 uppercase">
-                {userInfo.firstName?.charAt(0)}{userInfo.surname?.charAt(0)}
+                {userInfo?.firstName?.charAt(0) || ''}{userInfo?.surname?.charAt(0) || ''}
               </span>
             )}
           </div>
           <div className="text-center md:text-left flex-grow">
-            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Welcome back, {userInfo.firstName}!</h1>
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Welcome back{userInfo?.firstName ? `, ${userInfo.firstName}` : ''}!</h1>
             <p className="text-gray-500 mt-1">Ready to ace your next technical interview?</p>
             <div className="mt-6 flex flex-wrap justify-center md:justify-start gap-4">
               <div className="bg-slate-50 px-5 py-3 rounded-xl border border-gray-100">
