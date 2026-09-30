@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Register from './pages/Register';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
-import Home from './pages/Home';
-import Quiz from './pages/Quiz';
+import Dashboard from './pages/Dashboard';
+import InterviewRoom from './pages/InterviewRoom';
 import Results from './pages/Results';
 import Performance from './pages/Performance';
 import Profile from './pages/Profile';
@@ -22,8 +22,8 @@ function App() {
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/quiz/:role" element={<Quiz />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/interview/:role" element={<InterviewRoom />} />
           <Route path="/results" element={<Results />} />
           <Route path="/performance" element={<Performance />} />
           <Route path="/profile" element={<Profile />} />

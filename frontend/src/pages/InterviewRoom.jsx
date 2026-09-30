@@ -80,7 +80,8 @@ export default function Quiz() {
         state: { 
           score: res.data.score, 
           total: res.data.total, 
-          jobRole: decodedRole 
+          jobRole: decodedRole,
+          details: res.data.details
         } 
       });
 

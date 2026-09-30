@@ -13,7 +13,18 @@ const resultSchema = new mongoose.Schema({
     score: {
         type: Number,
         required: true
-    }
+    },
+    totalQuestions: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    details: [{
+        questionText: String,
+        submittedAnswer: String,
+        correctAnswer: String,
+        isCorrect: Boolean
+    }]
 }, {
     timestamps: true
 });

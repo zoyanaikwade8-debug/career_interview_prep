@@ -18,25 +18,38 @@ const submitQuiz = async (req, res) => {
         const questions = await Question.find({ _id: { $in: questionIds } });
         
         let score = 0;
+        const details = [];
 
         // Calculate score securely on the backend
         questions.forEach((q) => {
-            const userAnswer = answers[q._id.toString()];
-            if (userAnswer === q.correctAnswer) {
+            const userAnswer = answers[q._id.toString()] || '';
+            const isCorrect = userAnswer === q.correctAnswer;
+            
+            if (isCorrect) {
                 score += 1;
             }
+
+            details.push({
+                questionText: q.questionText,
+                submittedAnswer: userAnswer,
+                correctAnswer: q.correctAnswer,
+                isCorrect
+            });
         });
 
         // Save result in database
         const result = await Result.create({
             userId: req.user._id,
             jobRole,
-            score
+            score,
+            totalQuestions: questions.length,
+            details
         });
 
         res.status(201).json({
             score: result.score,
-            total: questions.length || Object.keys(answers).length
+            total: result.totalQuestions,
+            details: result.details
         });
     } catch (error) {
         res.status(500).json({ message: 'Server Error calculating result', error: error.message });
